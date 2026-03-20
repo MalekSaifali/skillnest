@@ -30,7 +30,7 @@ function App() {
   const addSkill = async () => {
     try {
       await axios.post(
-        "http://localhost:3000/add-skill",
+        "http://43.205.95.114:3000/add-skill",
         { skill_name: skill },
         {
           headers: { Authorization: token },
@@ -45,7 +45,7 @@ function App() {
 
   // 👀 GET SKILLS
   const getSkills = async () => {
-    const res = await axios.get("http://localhost:3000/skills");
+    const res = await axios.get("http://43.205.95.114:3000/skills");
     setSkills(res.data);
   };
 
