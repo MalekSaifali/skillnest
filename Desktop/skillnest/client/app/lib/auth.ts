@@ -1,25 +1,25 @@
-export function getToken(): string | null {
-  return typeof window !== 'undefined' ? localStorage.getItem('sn_token') : null;
-}
+import { fetchAuthSession, getCurrentUser } from '@aws-amplify/auth';
 
 export async function getAuthToken(): Promise<string> {
-  const token = getToken();
+  const session = await fetchAuthSession();
+  const token = session.tokens?.idToken?.toString();
   if (!token) throw new Error('No token');
   return token;
 }
 
 export async function getAuthSub(): Promise<string> {
-  const token = getToken();
-  if (!token) throw new Error('No token');
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  return payload.sub as string;
+  const session = await fetchAuthSession();
+  const sub = session.tokens?.idToken?.payload?.sub as string;
+  if (!sub) throw new Error('No sub');
+  return sub;
 }
 
 export async function requireAuth(router: any, redirect = '/login'): Promise<string> {
-  const token = getToken();
-  if (!token) {
+  try {
+    await getCurrentUser();
+    return await getAuthToken();
+  } catch {
     router.push(redirect);
     throw new Error('Not authenticated');
   }
-  return token;
 }

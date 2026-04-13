@@ -1,13 +1,14 @@
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
+import { signOut } from '@aws-amplify/auth';
 
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleLogout = () => {
-    localStorage.removeItem('sn_token');
+  const handleLogout = async () => {
+    await signOut();
     router.push('/login');
   };
 
