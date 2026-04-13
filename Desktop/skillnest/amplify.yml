@@ -3,6 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
+        - ls
+        - find . -name "package.json" -maxdepth 4 -not -path "*/node_modules/*"
         - cd Desktop/skillnest/client
         - npm install
     build:
