@@ -7,3 +7,7 @@ build/
 .DS_Store
 *.log
 coverage/
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/terraform.tfvars
