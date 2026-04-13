@@ -1,0 +1,30 @@
+2026-04-13T10:05:41.646Z [INFO]: # Build environment configured with Standard build compute type: 8GiB Memory, 4vCPUs, 128GB Disk Space
+2026-04-13T10:05:41.859Z [INFO]: # Retrieving Git provider SSH public keys
+2026-04-13T10:05:48.900Z [INFO]: # Successfully retrieved Git provider SSH public keys
+2026-04-13T10:05:48.975Z [INFO]: # Cloning repository: git@github.com:MalekSaifali/skillnest.git
+2026-04-13T10:05:53.541Z [INFO]: Agent pid 458
+2026-04-13T10:05:53.626Z [INFO]: Identity added: /root/.ssh/git_rsa (/root/.ssh/git_rsa)
+                                 Cloning into 'skillnest'...
+2026-04-13T10:05:53.626Z [INFO]: # Checking for Git submodules at: /codebuild/output/src1335658463/src/skillnest/.gitmodules
+2026-04-13T10:05:53.640Z [INFO]: # Retrieving environment cache...
+2026-04-13T10:05:53.685Z [WARNING]: ! Unable to write cache: {"code":"ERR_BAD_REQUEST","message":"Request failed with status code 404"})}
+2026-04-13T10:05:53.685Z [INFO]: ---- Setting Up SSM Secrets ----
+2026-04-13T10:05:53.685Z [INFO]: SSM params {"Path":"/amplify/d1ira3ohvpkrgw/main/","WithDecryption":true}
+2026-04-13T10:05:53.726Z [WARNING]: !Failed to set up process.env.secrets
+2026-04-13T10:05:54.523Z [INFO]: # No package override configuration found.
+2026-04-13T10:05:54.528Z [INFO]: # Retrieving cache...
+2026-04-13T10:05:54.564Z [INFO]: # Retrieved cache
+2026-04-13T10:05:59.037Z [INFO]: ## Starting Backend Build
+                                 ## Checking for associated backend environment...
+                                 ## No backend environment association found, continuing...
+                                 ## Completed Backend Build
+2026-04-13T10:05:59.042Z [INFO]: {"backendDuration": 0}
+                                 ## Starting Frontend Build
+                                 # Starting phase: preBuild
+                                 # Executing command: cd client
+2026-04-13T10:05:59.042Z [WARNING]: /root/.rvm/scripts/extras/bash_zsh_support/chpwd/function.sh: line 5: cd: client: No such file or directory
+2026-04-13T10:05:59.096Z [ERROR]: !!! Build failed
+2026-04-13T10:05:59.096Z [ERROR]: !!! Error: Command failed with exit code 1
+2026-04-13T10:05:59.096Z [INFO]: # Starting environment caching...
+2026-04-13T10:05:59.096Z [INFO]: # Environment caching completed
+
