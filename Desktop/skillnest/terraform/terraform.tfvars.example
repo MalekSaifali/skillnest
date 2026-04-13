@@ -1,0 +1,6 @@
+# Copy this file to terraform.tfvars and fill in your values
+# DO NOT commit terraform.tfvars to git
+
+db_password    = "SkillNest@2024!"
+jwt_secret     = "skillnest_super_secret_key_2024"
+ssh_public_key = "ssh-rsa AAAA... your public key here"

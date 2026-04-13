@@ -1,0 +1,3 @@
+db_password    = "SkillNest@2024!"
+jwt_secret     = "skillnest_super_secret_key_2024"
+ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDV9JfEEdY/A5v9Y1a898ZJ7UUkYcsICS5wwSBsY3GNZ1ThyHZQ0IruyyZUT3pereuPu7HdSeoZ9fHSQBHJHJQjn4ppYcdfwXkSBf3IIUD1yzIX/auNefFDg0ZttW0nbMdDlPBlHhyHdytKKqBweM9WJxmHOxe8cgSmli/fry9G8KhOLvilI4pJmIBfCNEHgA76JMBTu0p+a+xTFhfi5v40vq39E2/rOdqHz5As1CViCuypIitH19LpUM6agWrHUb1oCluL1/VUm8eIPWsEduybxUUn6A8LFDeP6JScfmc15DrTQoI5kbH9ug452acCqWb/zSZN51wbzmoMICmNvFJz lenovo@MRMALEK"
