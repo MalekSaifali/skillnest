@@ -25,8 +25,8 @@ export default function FeedPage() {
       const token = await requireAuth(router);
       const headers = { Authorization: `Bearer ${token}` };
       const [meRes, postsRes] = await Promise.all([
-        axios.get('http://localhost:4000/api/users/me', { headers }),
-        axios.get('http://localhost:4000/api/posts', { headers }),
+        axios.get('http://15.206.124.18:4000/api/users/me', { headers }),
+        axios.get('http://15.206.124.18:4000/api/posts', { headers }),
       ]);
       setMyId(meRes.data.cognito_sub);
       setMyName(meRes.data.name);
@@ -42,7 +42,7 @@ export default function FeedPage() {
     setPosting(true);
     try {
       const headers = await getHeaders();
-      const res = await axios.post('http://localhost:4000/api/posts', { content }, { headers });
+      const res = await axios.post('http://15.206.124.18:4000/api/posts', { content }, { headers });
       setPosts([res.data, ...posts]);
       setContent('');
     } catch (err) { console.error(err); }
@@ -52,7 +52,7 @@ export default function FeedPage() {
   const handleLike = async (postId: number) => {
     try {
       const headers = await getHeaders();
-      const res = await axios.post(`http://localhost:4000/api/posts/${postId}/like`, {}, { headers });
+      const res = await axios.post(`http://15.206.124.18:4000/api/posts/${postId}/like`, {}, { headers });
       setPosts(posts.map(p => p.id === postId ? { ...p, likes: res.data.likes } : p));
     } catch (err) { console.error(err); }
   };
@@ -62,7 +62,7 @@ export default function FeedPage() {
     if (!text?.trim()) return;
     try {
       const headers = await getHeaders();
-      const res = await axios.post(`http://localhost:4000/api/posts/${postId}/comment`, { content: text }, { headers });
+      const res = await axios.post(`http://15.206.124.18:4000/api/posts/${postId}/comment`, { content: text }, { headers });
       setPosts(posts.map(p => p.id === postId ? { ...p, comments: [...(p.comments || []), res.data] } : p));
       setCommentText({ ...commentText, [postId]: '' });
     } catch (err) { console.error(err); }
@@ -71,7 +71,7 @@ export default function FeedPage() {
   const handleDelete = async (postId: number) => {
     try {
       const headers = await getHeaders();
-      await axios.delete(`http://localhost:4000/api/posts/${postId}`, { headers });
+      await axios.delete(`http://15.206.124.18:4000/api/posts/${postId}`, { headers });
       setPosts(posts.filter(p => p.id !== postId));
     } catch (err) { console.error(err); }
   };
@@ -205,3 +205,5 @@ export default function FeedPage() {
     </div>
   );
 }
+
+

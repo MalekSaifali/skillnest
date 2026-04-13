@@ -19,7 +19,7 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('http://localhost:4000/api/auth/login', form);
+      const res = await axios.post('http://15.206.124.18:4000/api/auth/login', form);
       localStorage.setItem('sn_token', res.data.token);
       router.push('/dashboard');
     } catch (err: any) {
@@ -112,3 +112,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+

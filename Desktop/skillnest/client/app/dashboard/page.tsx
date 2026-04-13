@@ -25,15 +25,15 @@ export default function DashboardPage() {
       const token = await requireAuth(router);
       const headers = { Authorization: `Bearer ${token}` };
 
-      const meRes = await axios.get('http://localhost:4000/api/users/me', { headers });
+      const meRes = await axios.get('http://15.206.124.18:4000/api/users/me', { headers });
       const me = meRes.data;
 
       const [usersRes, connRes, followCountRes, endorseRes, pendingRes] = await Promise.all([
-        axios.get('http://localhost:4000/api/users/all', { headers }),
-        axios.get('http://localhost:4000/api/connect/status', { headers }),
-        axios.get('http://localhost:4000/api/follow/following', { headers }),
-        axios.get(`http://localhost:4000/api/users/endorsements/${me.cognito_sub}`, { headers }).catch(() => ({ data: [] })),
-        axios.get('http://localhost:4000/api/connect/requests', { headers }).catch(() => ({ data: [] })),
+        axios.get('http://15.206.124.18:4000/api/users/all', { headers }),
+        axios.get('http://15.206.124.18:4000/api/connect/status', { headers }),
+        axios.get('http://15.206.124.18:4000/api/follow/following', { headers }),
+        axios.get(`http://15.206.124.18:4000/api/users/endorsements/${me.cognito_sub}`, { headers }).catch(() => ({ data: [] })),
+        axios.get('http://15.206.124.18:4000/api/connect/requests', { headers }).catch(() => ({ data: [] })),
       ]);
 
       setUser(me);
@@ -42,7 +42,7 @@ export default function DashboardPage() {
 
       // Fetch MY follower count from follow-service
       const myFollowCount = await axios.get(
-        `http://localhost:4000/api/follow/count/${me.cognito_sub}`,
+        `http://15.206.124.18:4000/api/follow/count/${me.cognito_sub}`,
         { headers }
       ).catch(() => ({ data: { followers: 0, following: 0 } }));
 
@@ -75,7 +75,7 @@ export default function DashboardPage() {
       const token = await getToken();
       const headers = { Authorization: `Bearer ${token}` };
 
-      const convRes = await axios.get('http://localhost:4000/api/chat/conversations', { headers }).catch(() => ({ data: [] }));
+      const convRes = await axios.get('http://15.206.124.18:4000/api/chat/conversations', { headers }).catch(() => ({ data: [] }));
       if (!convRes.data.length) return;
 
       let totalNew = 0;
@@ -83,7 +83,7 @@ export default function DashboardPage() {
 
       for (const conv of convRes.data.slice(0, 3)) {
         const msgRes = await axios.get(
-          `http://localhost:4000/api/chat/messages/${conv.other_user_id}`,
+          `http://15.206.124.18:4000/api/chat/messages/${conv.other_user_id}`,
           { headers }
         ).catch(() => ({ data: [] }));
 
@@ -341,3 +341,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

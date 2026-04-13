@@ -143,7 +143,7 @@ resource "aws_key_pair" "skillnest" {
 # ─── EC2 INSTANCE ──────────────────────────────────────
 resource "aws_instance" "app" {
   ami                    = "ami-0f58b397bc5c1f2e8" # Ubuntu 22.04 ap-south-1
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_a.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   key_name               = aws_key_pair.skillnest.key_name

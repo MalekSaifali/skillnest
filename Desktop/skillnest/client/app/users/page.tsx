@@ -77,7 +77,7 @@ function BlockModal({ user, action, onConfirm, onCancel }: {
   );
 }
 
-const API = 'http://localhost:4000/api';
+const API = 'http://15.206.124.18:4000/api';
 
 export default function UsersPage() {
   const router = useRouter();
@@ -723,3 +723,4 @@ export default function UsersPage() {
     </div>
   );
 }
+

@@ -26,7 +26,7 @@ export default function SignupPage() {
     setLoading(true);
     setError('');
     try {
-      await axios.post('http://localhost:4000/api/auth/signup', form);
+      await axios.post('http://15.206.124.18:4000/api/auth/signup', form);
       setSuccess(true);
       setTimeout(() => router.push('/login'), 2000);
     } catch (err: any) {
@@ -139,3 +139,5 @@ export default function SignupPage() {
     </div>
   );
 }
+
+

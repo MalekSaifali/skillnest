@@ -101,9 +101,9 @@ export default function ChatPage() {
         const headers = { Authorization: `Bearer ${token}` };
 
         const [meRes, allRes, connRes] = await Promise.all([
-          axios.get('http://localhost:4000/api/users/me', { headers }),
-          axios.get('http://localhost:4000/api/users/all', { headers }),
-          axios.get('http://localhost:4000/api/connect/status', { headers }),
+          axios.get('http://15.206.124.18:4000/api/users/me', { headers }),
+          axios.get('http://15.206.124.18:4000/api/users/all', { headers }),
+          axios.get('http://15.206.124.18:4000/api/connect/status', { headers }),
         ]);
 
         const me = meRes.data;
@@ -125,7 +125,7 @@ export default function ChatPage() {
 
         setConnectedUsers(chatUsers);
 
-        const socket = io('http://localhost:4004', { transports: ['websocket', 'polling'] });
+        const socket = io('http://15.206.124.18:4004', { transports: ['websocket', 'polling'] });
         socketRef.current = socket;
 
         socket.on('connect', () => {
@@ -196,7 +196,7 @@ export default function ChatPage() {
     try {
       const token = await getToken();
       const res = await axios.get(
-        `http://localhost:4000/api/chat/messages/${selectedUser.cognito_sub}`,
+        `http://15.206.124.18:4000/api/chat/messages/${selectedUser.cognito_sub}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMessages(res.data);
@@ -214,9 +214,9 @@ export default function ChatPage() {
       const token = await getToken();
       const headers = { Authorization: `Bearer ${token}` };
       const [profileRes, followStatusRes, followCountRes] = await Promise.all([
-        axios.get(`http://localhost:4000/api/users/profile/${user.cognito_sub}`, { headers }).catch(() => ({ data: user })),
-        axios.get(`http://localhost:4000/api/follow/status/${user.cognito_sub}`, { headers }).catch(() => ({ data: { isFollowing: false } })),
-        axios.get(`http://localhost:4000/api/follow/count/${user.cognito_sub}`, { headers }).catch(() => ({ data: { followers: 0, following: 0 } })),
+        axios.get(`http://15.206.124.18:4000/api/users/profile/${user.cognito_sub}`, { headers }).catch(() => ({ data: user })),
+        axios.get(`http://15.206.124.18:4000/api/follow/status/${user.cognito_sub}`, { headers }).catch(() => ({ data: { isFollowing: false } })),
+        axios.get(`http://15.206.124.18:4000/api/follow/count/${user.cognito_sub}`, { headers }).catch(() => ({ data: { followers: 0, following: 0 } })),
       ]);
       setProfileData(profileRes.data);
       setIsFollowing(followStatusRes.data.isFollowing);
@@ -235,14 +235,14 @@ export default function ChatPage() {
       const token = await getToken();
       const headers = { Authorization: `Bearer ${token}` };
       if (isFollowing) {
-        await axios.delete('http://localhost:4000/api/follow/unfollow', {
+        await axios.delete('http://15.206.124.18:4000/api/follow/unfollow', {
           headers,
           data: { following_id: profileData.cognito_sub }
         });
         setIsFollowing(false);
         setFollowCounts(prev => ({ ...prev, followers: Math.max(0, prev.followers - 1) }));
       } else {
-        await axios.post('http://localhost:4000/api/follow/follow',
+        await axios.post('http://15.206.124.18:4000/api/follow/follow',
           { following_id: profileData.cognito_sub },
           { headers }
         );
@@ -273,7 +273,7 @@ export default function ChatPage() {
 
     try {
       await axios.post(
-        'http://localhost:4000/api/chat/send',
+        'http://15.206.124.18:4000/api/chat/send',
         { receiver_id: selectedUser.cognito_sub, message: msgData.message },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -675,3 +675,4 @@ export default function ChatPage() {
     </div>
   );
 }
+

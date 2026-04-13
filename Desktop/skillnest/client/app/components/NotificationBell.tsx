@@ -38,8 +38,8 @@ export default function NotificationBell({ userId }: { userId: string }) {
       const token = await getToken();
       const headers = { Authorization: `Bearer ${token}` };
       const [notifsRes, countRes] = await Promise.all([
-        axios.get('http://localhost:4000/api/chat/notifications', { headers }),
-        axios.get('http://localhost:4000/api/chat/notifications/unread-count', { headers }),
+        axios.get('http://15.206.124.18:4000/api/chat/notifications', { headers }),
+        axios.get('http://15.206.124.18:4000/api/chat/notifications/unread-count', { headers }),
       ]);
       setNotifications(notifsRes.data);
       setUnreadCount(countRes.data.count);
@@ -53,7 +53,7 @@ export default function NotificationBell({ userId }: { userId: string }) {
   const markAllRead = async () => {
     try {
       const token = await getToken();
-      await axios.put('http://localhost:4000/api/chat/notifications/mark-read', {}, {
+      await axios.put('http://15.206.124.18:4000/api/chat/notifications/mark-read', {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(prev => prev.map(n => ({ ...n, is_read: true })));
@@ -67,7 +67,7 @@ export default function NotificationBell({ userId }: { userId: string }) {
     e.stopPropagation();
     try {
       const token = await getToken();
-      await axios.delete(`http://localhost:4000/api/chat/notifications/${id}`, {
+      await axios.delete(`http://15.206.124.18:4000/api/chat/notifications/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(prev => prev.filter(n => n.id !== id));
@@ -80,7 +80,7 @@ export default function NotificationBell({ userId }: { userId: string }) {
   const handleNotifClick = async (notif: Notification) => {
     try {
       const token = await getToken();
-      await axios.put(`http://localhost:4000/api/chat/notifications/${notif.id}/read`, {}, {
+      await axios.put(`http://15.206.124.18:4000/api/chat/notifications/${notif.id}/read`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(prev => prev.map(n => n.id === notif.id ? { ...n, is_read: true } : n));
@@ -96,7 +96,7 @@ export default function NotificationBell({ userId }: { userId: string }) {
   useEffect(() => {
     if (!userId) return;
 
-    const socket = io('http://localhost:4004');
+    const socket = io('http://15.206.124.18:4004');
     socketRef.current = socket;
 
     socket.on('connect', () => {
@@ -342,7 +342,7 @@ export default function NotificationBell({ userId }: { userId: string }) {
                     const token = await getToken();
                     await Promise.all(
                       notifications.map(n =>
-                        axios.delete(`http://localhost:4000/api/chat/notifications/${n.id}`, {
+                        axios.delete(`http://15.206.124.18:4000/api/chat/notifications/${n.id}`, {
                           headers: { Authorization: `Bearer ${token}` }
                         })
                       )
@@ -366,3 +366,4 @@ export default function NotificationBell({ userId }: { userId: string }) {
     </div>
   );
 }
+
