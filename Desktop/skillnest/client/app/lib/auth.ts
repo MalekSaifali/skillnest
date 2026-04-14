@@ -1,7 +1,7 @@
 import { Amplify } from 'aws-amplify';
-import { fetchAuthSession, getCurrentUser } from '@aws-amplify/auth';
+import { fetchAuthSession, getCurrentUser, signOut } from '@aws-amplify/auth';
 
-Amplify.configure({
+const COGNITO_CONFIG = {
   Auth: {
     Cognito: {
       userPoolId: 'ap-south-1_TCheqKNUA',
@@ -9,50 +9,58 @@ Amplify.configure({
       loginWith: { email: true },
     }
   }
-});
+};
 
-function getTokenFromStorage(): string | null {
-  if (typeof window === 'undefined') return null;
-  // Amplify v6 stores tokens in localStorage with this key pattern
-  const clientId = '797pd77i4irdf3oavq17glgvr0';
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key && key.includes(clientId) && key.includes('idToken')) {
-      return localStorage.getItem(key);
-    }
-  }
-  return null;
-}
+// Configure once
+try { Amplify.configure(COGNITO_CONFIG); } catch {}
 
 export async function getAuthToken(): Promise<string> {
+  // Try Amplify session first
   try {
-    const session = await fetchAuthSession();
+    const session = await fetchAuthSession({ forceRefresh: false });
     const token = session.tokens?.idToken?.toString();
     if (token) return token;
   } catch {}
-  // Fallback: read directly from localStorage
-  const token = getTokenFromStorage();
-  if (token) return token;
+
+  // Fallback: scan localStorage for Cognito token
+  if (typeof window !== 'undefined') {
+    const clientId = '797pd77i4irdf3oavq17glgvr0';
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i) || '';
+      if (key.includes(clientId) && key.includes('idToken')) {
+        const val = localStorage.getItem(key);
+        if (val) return val;
+      }
+    }
+  }
   throw new Error('No token');
 }
 
 export async function getAuthSub(): Promise<string> {
   try {
-    const session = await fetchAuthSession();
+    const session = await fetchAuthSession({ forceRefresh: false });
     const sub = session.tokens?.idToken?.payload?.sub as string;
     if (sub) return sub;
+  } catch {}
+
+  // Parse from token
+  try {
+    const token = await getAuthToken();
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.sub;
   } catch {}
   throw new Error('No sub');
 }
 
 export async function requireAuth(router: any, redirect = '/login'): Promise<string> {
   try {
-    await getCurrentUser();
-    return await getAuthToken();
+    const token = await getAuthToken();
+    return token;
   } catch {
-    // Try localStorage fallback
-    const token = getTokenFromStorage();
-    if (token) return token;
+    try { await getCurrentUser(); } catch {
+      router.push(redirect);
+      throw new Error('Not authenticated');
+    }
     router.push(redirect);
     throw new Error('Not authenticated');
   }

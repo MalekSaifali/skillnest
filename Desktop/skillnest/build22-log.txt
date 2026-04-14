@@ -1,0 +1,145 @@
+2026-04-14T09:53:20.644Z [INFO]: # Build environment configured with Standard build compute type: 8GiB Memory, 4vCPUs, 128GB Disk Space
+2026-04-14T09:53:20.870Z [INFO]: # Retrieving Git provider SSH public keys
+2026-04-14T09:53:28.049Z [INFO]: # Successfully retrieved Git provider SSH public keys
+2026-04-14T09:53:28.155Z [INFO]: # Cloning repository: git@github.com:MalekSaifali/skillnest.git
+2026-04-14T09:53:32.570Z [INFO]: Agent pid 460
+2026-04-14T09:53:32.655Z [INFO]: Identity added: /root/.ssh/git_rsa (/root/.ssh/git_rsa)
+                                 Cloning into 'skillnest'...
+2026-04-14T09:53:32.657Z [INFO]: # Switching to commit: bf812365bf405bbb662b1c81bf33cd908c575155
+2026-04-14T09:53:32.708Z [INFO]: Agent pid 471
+2026-04-14T09:53:32.709Z [INFO]: Identity added: /root/.ssh/git_rsa (/root/.ssh/git_rsa)
+                                 Note: switching to 'bf812365bf405bbb662b1c81bf33cd908c575155'.
+                                 You are in 'detached HEAD' state. You can look around, make experimental
+                                 changes and commit them, and you can discard any commits you make in this
+                                 state without impacting any branches by switching back to a branch.
+                                 If you want to create a new branch to retain commits you create, you may
+                                 do so (now or later) by using -c with the switch command. Example:
+                                 git switch -c <new-branch-name>
+                                 Or undo this operation with:
+                                 git switch -
+                                 Turn off this advice by setting config variable advice.detachedHead to false
+                                 HEAD is now at bf81236 fix: switch to SSR mode for proper Cognito session
+2026-04-14T09:53:32.721Z [INFO]: Successfully cleaned up Git credentials
+2026-04-14T09:53:32.721Z [INFO]: # Checking for Git submodules at: /codebuild/output/src1544315828/src/skillnest/.gitmodules
+2026-04-14T09:53:32.726Z [INFO]: # Retrieving environment cache...
+2026-04-14T09:53:32.773Z [INFO]: # Retrieved environment cache
+2026-04-14T09:53:32.773Z [INFO]: ---- Setting Up SSM Secrets ----
+2026-04-14T09:53:32.773Z [INFO]: SSM params {"Path":"/amplify/d1ira3ohvpkrgw/main/","WithDecryption":true}
+2026-04-14T09:53:32.811Z [WARNING]: !Failed to set up process.env.secrets
+2026-04-14T09:53:33.622Z [INFO]: # No package override configuration found.
+2026-04-14T09:53:33.627Z [INFO]: # Retrieving cache...
+2026-04-14T09:53:40.428Z [INFO]: # Extracting cache...
+2026-04-14T09:53:52.966Z [INFO]: # Extraction completed
+2026-04-14T09:53:53.115Z [INFO]: # Retrieved cache
+2026-04-14T09:53:57.516Z [INFO]: ## Starting Backend Build
+                                 ## Checking for associated backend environment...
+                                 ## No backend environment association found, continuing...
+                                 ## Completed Backend Build
+2026-04-14T09:53:57.520Z [INFO]: {"backendDuration": 0}
+                                 ## Starting Frontend Build
+                                 # Starting phase: preBuild
+                                 # Executing command: cd Desktop/skillnest/client
+2026-04-14T09:53:57.552Z [INFO]: # Executing command: npm install
+2026-04-14T09:54:14.401Z [WARNING]: npm warn ERESOLVE overriding peer dependency
+2026-04-14T09:54:14.405Z [WARNING]: npm warn While resolving: @xstate/react@3.2.2
+                                    npm warn Found: react@19.2.4
+                                    npm warn node_modules/react
+                                    npm warn   react@"19.2.4" from the root project
+                                    npm warn   40 more (@aws-amplify/ui-react, @aws-amplify/ui-react-core, ...)
+                                    npm warn
+                                    npm warn Could not resolve dependency:
+                                    npm warn peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from @xstate/react@3.2.2
+                                    npm warn node_modules/@aws-amplify/ui-react-core/node_modules/@xstate/react
+                                    npm warn   @xstate/react@"^3.2.2" from @aws-amplify/ui-react-core@3.6.2
+                                    npm warn   node_modules/@aws-amplify/ui-react-core
+                                    npm warn
+                                    npm warn Conflicting peer dependency: react@18.3.1
+                                    npm warn node_modules/react
+                                    npm warn   peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from @xstate/react@3.2.2
+                                    npm warn   node_modules/@aws-amplify/ui-react-core/node_modules/@xstate/react
+                                    npm warn     @xstate/react@"^3.2.2" from @aws-amplify/ui-react-core@3.6.2
+                                    npm warn     node_modules/@aws-amplify/ui-react-core
+2026-04-14T09:54:14.421Z [WARNING]: npm warn ERESOLVE overriding peer dependency
+2026-04-14T09:54:14.422Z [WARNING]: npm warn While resolving: @xstate/react@3.2.2
+                                    npm warn Found: react@19.2.4
+                                    npm warn node_modules/react
+                                    npm warn   react@"19.2.4" from the root project
+                                    npm warn   40 more (@aws-amplify/ui-react, @aws-amplify/ui-react-core, ...)
+                                    npm warn
+                                    npm warn Could not resolve dependency:
+                                    npm warn peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from @xstate/react@3.2.2
+                                    npm warn node_modules/@aws-amplify/ui-react/node_modules/@xstate/react
+                                    npm warn   @xstate/react@"^3.2.2" from @aws-amplify/ui-react@6.15.2
+                                    npm warn   node_modules/@aws-amplify/ui-react
+                                    npm warn
+                                    npm warn Conflicting peer dependency: react@18.3.1
+                                    npm warn node_modules/react
+                                    npm warn   peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from @xstate/react@3.2.2
+                                    npm warn   node_modules/@aws-amplify/ui-react/node_modules/@xstate/react
+                                    npm warn     @xstate/react@"^3.2.2" from @aws-amplify/ui-react@6.15.2
+                                    npm warn     node_modules/@aws-amplify/ui-react
+2026-04-14T09:54:24.079Z [INFO]: up to date, audited 638 packages in 22s
+2026-04-14T09:54:24.084Z [INFO]: 160 packages are looking for funding
+                                 run `npm fund` for details
+2026-04-14T09:54:24.231Z [INFO]: 8 vulnerabilities (2 moderate, 5 high, 1 critical)
+                                 To address issues that do not require attention, run:
+                                 npm audit fix
+                                 To address all issues, run:
+                                 npm audit fix --force
+                                 Run `npm audit` for details.
+2026-04-14T09:54:24.249Z [INFO]: # Completed phase: preBuild
+                                 # Starting phase: build
+2026-04-14T09:54:24.249Z [INFO]: # Executing command: npm run build
+2026-04-14T09:54:24.352Z [INFO]: > client@0.1.0 build
+                                 > next build
+2026-04-14T09:54:24.907Z [WARNING]: ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+                                    We detected multiple lockfiles and selected the directory of /codebuild/output/src1544315828/src/skillnest/Desktop/skillnest/package-lock.json as the root directory.
+                                    To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+                                    See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+                                    Detected additional lockfiles:
+                                    * /codebuild/output/src1544315828/src/skillnest/Desktop/skillnest/client/package-lock.json
+2026-04-14T09:54:24.908Z [INFO]: ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-04-14T09:54:24.914Z [INFO]: Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-04-14T09:54:24.914Z [INFO]: This information is used to shape Next.js' roadmap and prioritize features.
+                                 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+                                 https://nextjs.org/telemetry
+2026-04-14T09:54:24.932Z [INFO]: ▲ Next.js 16.2.1 (Turbopack)
+2026-04-14T09:54:24.932Z [INFO]: 
+2026-04-14T09:54:25.019Z [INFO]: Creating an optimized production build ...
+2026-04-14T09:54:31.568Z [INFO]: ✓ Compiled successfully in 6.3s
+2026-04-14T09:54:31.574Z [INFO]: Running TypeScript ...
+2026-04-14T09:54:35.999Z [INFO]: Finished TypeScript in 4.4s ...
+2026-04-14T09:54:36.005Z [INFO]: Collecting page data using 3 workers ...
+2026-04-14T09:54:36.446Z [INFO]: Generating static pages using 3 workers (0/11) ...
+2026-04-14T09:54:36.744Z [INFO]: Generating static pages using 3 workers (2/11)
+2026-04-14T09:54:36.745Z [INFO]: Generating static pages using 3 workers (5/11)
+2026-04-14T09:54:36.745Z [INFO]: Generating static pages using 3 workers (8/11)
+2026-04-14T09:54:36.794Z [INFO]: ✓ Generating static pages using 3 workers (11/11) in 348ms
+2026-04-14T09:54:36.801Z [INFO]: Finalizing page optimization ...
+2026-04-14T09:54:36.806Z [INFO]: 
+2026-04-14T09:54:36.808Z [INFO]: Route (app)
+                                 ┌ ○ /
+                                 ├ ○ /_not-found
+                                 ├ ○ /chat
+                                 ├ ○ /dashboard
+                                 ├ ○ /feed
+                                 ├ ○ /login
+                                 ├ ○ /profile
+                                 ├ ○ /signup
+                                 └ ○ /users
+2026-04-14T09:54:36.808Z [INFO]: ○  (Static)  prerendered as static content
+2026-04-14T09:54:37.085Z [INFO]: # Completed phase: build
+                                 ## Completed Frontend Build
+2026-04-14T09:54:37.096Z [INFO]: ## Build completed successfully
+2026-04-14T09:54:37.096Z [INFO]: # Starting caching...
+2026-04-14T09:54:37.105Z [INFO]: # Creating cache artifact...
+2026-04-14T09:54:45.905Z [INFO]: # Created cache artifact
+2026-04-14T09:54:45.967Z [INFO]: # Uploading cache artifact...
+2026-04-14T09:54:51.942Z [INFO]: # Uploaded cache artifact
+2026-04-14T09:54:52.015Z [INFO]: # Caching completed
+2026-04-14T09:54:52.020Z [ERROR]: !!! CustomerError: Failed to find the deploy-manifest.json file in the build output. Please verify that it exists within the "baseDirectory" specified in your buildSpec. If it's not there, we will also check the .amplify-hosting directory as a fallback. When using a framework adapter for hosting on Amplify, double-check that the adapter settings are correct.
+2026-04-14T09:54:52.022Z [INFO]: # Starting environment caching...
+2026-04-14T09:54:52.023Z [INFO]: # Uploading environment cache artifact...
+2026-04-14T09:54:52.098Z [INFO]: # Uploaded environment cache artifact
+2026-04-14T09:54:52.098Z [INFO]: # Environment caching completed
+
