@@ -125,7 +125,7 @@ export default function ChatPage() {
 
         setConnectedUsers(chatUsers);
 
-        const socket = io('http://15.206.124.18:4004', { transports: ['websocket', 'polling'] });
+        const socket = io('http://15.206.124.18:4004', { transports: ['polling', 'websocket'] });
         socketRef.current = socket;
 
         socket.on('connect', () => {

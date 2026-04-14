@@ -448,6 +448,18 @@ router.post('/report', async (req, res) => {
   }
 });
 
+// ✅ GET USER PROFILE BY ID
+router.get('/profile/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const result = await pool.query('SELECT * FROM users WHERE cognito_sub=$1', [userId]);
+    if (!result.rows.length) return res.status(404).json({ error: 'User not found' });
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ✅ GET TRENDING SKILLS
 router.get('/trending-skills', async (req, res) => {
   try {
