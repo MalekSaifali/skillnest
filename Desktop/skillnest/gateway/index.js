@@ -16,7 +16,8 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 const client = jwksClient({
   jwksUri: `https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_TCheqKNUA/.well-known/jwks.json`

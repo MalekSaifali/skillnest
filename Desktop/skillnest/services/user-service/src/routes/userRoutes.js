@@ -118,7 +118,7 @@ router.put('/update', async (req, res) => {
       name, bio, skills, is_public,
       github_url, linkedin_url,
       skill_levels, experience_entries, projects,
-      location, experience, domain
+      location, experience, domain, avatar_url, resume_url
     } = req.body;
 
     // First check what columns actually exist to avoid 500
@@ -136,8 +136,10 @@ router.put('/update', async (req, res) => {
            location=$10,
            experience_level=$11,
            domain=$12,
+           avatar_url=$13,
+           resume_url=$14,
            last_active=NOW()
-       WHERE email=$13
+       WHERE email=$15
        RETURNING *`,
       [
         name,
@@ -152,6 +154,8 @@ router.put('/update', async (req, res) => {
         location || null,
         experience || null,
         domain || null,
+        avatar_url || null,
+        resume_url || null,
         email
       ]
     );

@@ -31,8 +31,10 @@ export default function FeedPage() {
       setMyId(meRes.data.cognito_sub);
       setMyName(meRes.data.name);
       setPosts(postsRes.data);
-    } catch { router.push('/login'); }
-    finally { setLoading(false); }
+    } catch (err: any) {
+      if (err?.message === 'Not authenticated') return;
+      console.error('Feed error:', err);
+    } finally { setLoading(false); }
   };
 
   useEffect(() => { loadFeed(); }, []);
