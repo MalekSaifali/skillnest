@@ -125,7 +125,7 @@ export default function ChatPage() {
 
         setConnectedUsers(chatUsers);
 
-        const socket = io('https://d2tf8c984u0s6x.cloudfront.net', { transports: ['polling', 'websocket'], path: '/socket.io' });
+        const socket = io('http://15.206.124.18:4004', { transports: ['polling', 'websocket'] });
         socketRef.current = socket;
 
         socket.on('connect', () => {
