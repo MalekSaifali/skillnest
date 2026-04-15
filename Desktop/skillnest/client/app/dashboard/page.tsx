@@ -25,15 +25,15 @@ export default function DashboardPage() {
       const token = await requireAuth(router);
       const headers = { Authorization: `Bearer ${token}` };
 
-      const meRes = await axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/users/me', { headers });
+      const meRes = await axios.get('https://d2wd5c91egufsr.cloudfront.net/api/users/me', { headers });
       const me = meRes.data;
 
       const [usersRes, connRes, followCountRes, endorseRes, pendingRes] = await Promise.all([
-        axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/users/all', { headers }),
-        axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/connect/status', { headers }),
-        axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/follow/following', { headers }),
-        axios.get(`https://d2tf8c984u0s6x.cloudfront.net/api/users/endorsements/${me.cognito_sub}`, { headers }).catch(() => ({ data: [] })),
-        axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/connect/requests', { headers }).catch(() => ({ data: [] })),
+        axios.get('https://d2wd5c91egufsr.cloudfront.net/api/users/all', { headers }),
+        axios.get('https://d2wd5c91egufsr.cloudfront.net/api/connect/status', { headers }),
+        axios.get('https://d2wd5c91egufsr.cloudfront.net/api/follow/following', { headers }),
+        axios.get(`https://d2wd5c91egufsr.cloudfront.net/api/users/endorsements/${me.cognito_sub}`, { headers }).catch(() => ({ data: [] })),
+        axios.get('https://d2wd5c91egufsr.cloudfront.net/api/connect/requests', { headers }).catch(() => ({ data: [] })),
       ]);
 
       setUser(me);
@@ -42,7 +42,7 @@ export default function DashboardPage() {
 
       // Fetch MY follower count from follow-service
       const myFollowCount = await axios.get(
-        `https://d2tf8c984u0s6x.cloudfront.net/api/follow/count/${me.cognito_sub}`,
+        `https://d2wd5c91egufsr.cloudfront.net/api/follow/count/${me.cognito_sub}`,
         { headers }
       ).catch(() => ({ data: { followers: 0, following: 0 } }));
 
@@ -75,7 +75,7 @@ export default function DashboardPage() {
       const token = await getToken();
       const headers = { Authorization: `Bearer ${token}` };
 
-      const convRes = await axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/chat/conversations', { headers }).catch(() => ({ data: [] }));
+      const convRes = await axios.get('https://d2wd5c91egufsr.cloudfront.net/api/chat/conversations', { headers }).catch(() => ({ data: [] }));
       if (!convRes.data.length) return;
 
       let totalNew = 0;
@@ -83,7 +83,7 @@ export default function DashboardPage() {
 
       for (const conv of convRes.data.slice(0, 3)) {
         const msgRes = await axios.get(
-          `https://d2tf8c984u0s6x.cloudfront.net/api/chat/messages/${conv.other_user_id}`,
+          `https://d2wd5c91egufsr.cloudfront.net/api/chat/messages/${conv.other_user_id}`,
           { headers }
         ).catch(() => ({ data: [] }));
 

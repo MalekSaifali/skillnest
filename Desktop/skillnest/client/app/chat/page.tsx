@@ -101,9 +101,9 @@ export default function ChatPage() {
         const headers = { Authorization: `Bearer ${token}` };
 
         const [meRes, allRes, connRes] = await Promise.all([
-          axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/users/me', { headers }),
-          axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/users/all', { headers }),
-          axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/connect/status', { headers }),
+          axios.get('https://d2wd5c91egufsr.cloudfront.net/api/users/me', { headers }),
+          axios.get('https://d2wd5c91egufsr.cloudfront.net/api/users/all', { headers }),
+          axios.get('https://d2wd5c91egufsr.cloudfront.net/api/connect/status', { headers }),
         ]);
 
         const me = meRes.data;
@@ -196,7 +196,7 @@ export default function ChatPage() {
     try {
       const token = await getToken();
       const res = await axios.get(
-        `https://d2tf8c984u0s6x.cloudfront.net/api/chat/messages/${selectedUser.cognito_sub}`,
+        `https://d2wd5c91egufsr.cloudfront.net/api/chat/messages/${selectedUser.cognito_sub}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMessages(res.data);
@@ -214,9 +214,9 @@ export default function ChatPage() {
       const token = await getToken();
       const headers = { Authorization: `Bearer ${token}` };
       const [profileRes, followStatusRes, followCountRes] = await Promise.all([
-        axios.get(`https://d2tf8c984u0s6x.cloudfront.net/api/users/profile/${user.cognito_sub}`, { headers }).catch(() => ({ data: user })),
-        axios.get(`https://d2tf8c984u0s6x.cloudfront.net/api/follow/status/${user.cognito_sub}`, { headers }).catch(() => ({ data: { isFollowing: false } })),
-        axios.get(`https://d2tf8c984u0s6x.cloudfront.net/api/follow/count/${user.cognito_sub}`, { headers }).catch(() => ({ data: { followers: 0, following: 0 } })),
+        axios.get(`https://d2wd5c91egufsr.cloudfront.net/api/users/profile/${user.cognito_sub}`, { headers }).catch(() => ({ data: user })),
+        axios.get(`https://d2wd5c91egufsr.cloudfront.net/api/follow/status/${user.cognito_sub}`, { headers }).catch(() => ({ data: { isFollowing: false } })),
+        axios.get(`https://d2wd5c91egufsr.cloudfront.net/api/follow/count/${user.cognito_sub}`, { headers }).catch(() => ({ data: { followers: 0, following: 0 } })),
       ]);
       setProfileData(profileRes.data);
       setIsFollowing(followStatusRes.data.isFollowing);
@@ -235,14 +235,14 @@ export default function ChatPage() {
       const token = await getToken();
       const headers = { Authorization: `Bearer ${token}` };
       if (isFollowing) {
-        await axios.delete('https://d2tf8c984u0s6x.cloudfront.net/api/follow/unfollow', {
+        await axios.delete('https://d2wd5c91egufsr.cloudfront.net/api/follow/unfollow', {
           headers,
           data: { following_id: profileData.cognito_sub }
         });
         setIsFollowing(false);
         setFollowCounts(prev => ({ ...prev, followers: Math.max(0, prev.followers - 1) }));
       } else {
-        await axios.post('https://d2tf8c984u0s6x.cloudfront.net/api/follow/follow',
+        await axios.post('https://d2wd5c91egufsr.cloudfront.net/api/follow/follow',
           { following_id: profileData.cognito_sub },
           { headers }
         );
@@ -273,7 +273,7 @@ export default function ChatPage() {
 
     try {
       await axios.post(
-        'https://d2tf8c984u0s6x.cloudfront.net/api/chat/send',
+        'https://d2wd5c91egufsr.cloudfront.net/api/chat/send',
         { receiver_id: selectedUser.cognito_sub, message: msgData.message },
         { headers: { Authorization: `Bearer ${token}` } }
       );

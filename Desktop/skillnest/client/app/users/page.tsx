@@ -77,7 +77,7 @@ function BlockModal({ user, action, onConfirm, onCancel }: {
   );
 }
 
-const API = 'https://d2tf8c984u0s6x.cloudfront.net/api';
+const API = 'https://d2wd5c91egufsr.cloudfront.net/api';
 
 export default function UsersPage() {
   const router = useRouter();

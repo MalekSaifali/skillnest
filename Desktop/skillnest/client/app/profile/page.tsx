@@ -57,7 +57,7 @@ export default function ProfilePage() {
   const loadUser = async () => {
     try {
       const token = await requireAuth(router);
-      const res = await axios.get('https://d2tf8c984u0s6x.cloudfront.net/api/users/me', {
+      const res = await axios.get('https://d2wd5c91egufsr.cloudfront.net/api/users/me', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = res.data;
@@ -155,7 +155,7 @@ export default function ProfilePage() {
     try {
       setSaving(true);
       const token = await getToken();
-      await axios.put('https://d2tf8c984u0s6x.cloudfront.net/api/users/update', {
+      await axios.put('https://d2wd5c91egufsr.cloudfront.net/api/users/update', {
         ...form,
         skills,
         skill_levels: skillLevels,
