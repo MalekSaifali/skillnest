@@ -52,8 +52,6 @@ export default function ProfilePage() {
   const [experience, setExperience] = useState<Experience[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
 
-  const getToken = getAuthToken;
-
   const loadUser = async () => {
     try {
       const token = await requireAuth(router);
@@ -76,7 +74,7 @@ export default function ProfilePage() {
       });
       setSkills(data.skills || []);
       setSkillLevels(data.skill_levels || {});
-      setExperience(data.experience || []);
+      setExperience(Array.isArray(data.experience) ? data.experience : []);
       setProjects(data.projects || []);
       if (data.avatar_url) setAvatarPreview(data.avatar_url);
       if (data.resume_url) setResumeName('Resume uploaded ✅');
@@ -91,6 +89,10 @@ export default function ProfilePage() {
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+      setMessage('❌ Image must be under 2MB');
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       const base64 = reader.result as string;
@@ -154,7 +156,7 @@ export default function ProfilePage() {
   const handleSave = async () => {
     try {
       setSaving(true);
-      const token = await getToken();
+      const token = await getAuthToken();
       await axios.put('https://d2wd5c91egufsr.cloudfront.net/api/users/update', {
         ...form,
         skills,

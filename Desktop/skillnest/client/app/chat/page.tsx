@@ -86,9 +86,7 @@ export default function ChatPage() {
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const getToken = getAuthToken;
-
-  const scrollToBottom = (smooth = true) => {
+ = (smooth = true) => {
     messagesEndRef.current?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
   };
 
@@ -125,7 +123,10 @@ export default function ChatPage() {
 
         setConnectedUsers(chatUsers);
 
-        const socket = io('http://15.206.124.18:4004', { transports: ['polling', 'websocket'] });
+        const socket = io('https://d2wd5c91egufsr.cloudfront.net', {
+          path: '/socket.io',
+          transports: ['polling', 'websocket']
+        });
         socketRef.current = socket;
 
         socket.on('connect', () => {
@@ -194,7 +195,7 @@ export default function ChatPage() {
   const loadMessages = async () => {
     if (!selectedUser) return;
     try {
-      const token = await getToken();
+      const token = await getAuthToken();
       const res = await axios.get(
         `https://d2wd5c91egufsr.cloudfront.net/api/chat/messages/${selectedUser.cognito_sub}`,
         { headers: { Authorization: `Bearer ${token}` } }
@@ -211,7 +212,7 @@ export default function ChatPage() {
     setShowProfile(true);
     setProfileLoading(true);
     try {
-      const token = await getToken();
+      const token = await getAuthToken();
       const headers = { Authorization: `Bearer ${token}` };
       const [profileRes, followStatusRes, followCountRes] = await Promise.all([
         axios.get(`https://d2wd5c91egufsr.cloudfront.net/api/users/profile/${user.cognito_sub}`, { headers }).catch(() => ({ data: user })),
@@ -232,7 +233,7 @@ export default function ChatPage() {
     if (!profileData) return;
     setFollowLoading(true);
     try {
-      const token = await getToken();
+      const token = await getAuthToken();
       const headers = { Authorization: `Bearer ${token}` };
       if (isFollowing) {
         await axios.post('https://d2wd5c91egufsr.cloudfront.net/api/follow/unfollow', { following_id: profileData.cognito_sub }, { headers });
@@ -256,7 +257,7 @@ export default function ChatPage() {
   const sendMessage = async () => {
     if (!newMessage.trim() || !selectedUser) return;
 
-    const token = await getToken();
+    const token = await getAuthToken();
     const msgData: Message = {
       sender_id: myId,
       receiver_id: selectedUser.cognito_sub,
